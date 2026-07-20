@@ -97,9 +97,11 @@ def get_java_args():
     if len(options.files) > 1:
         file_multipler = len(options.files)
 
-        thread_multiplier = options.threads // 4
+        thread_multiplier = max(1,options.threads // 4)
 
         used_memory *= min(file_multipler, thread_multiplier)
+
+        print(f"Used mem is {used_memory}")
 
 
     java_args.insert(0,f"-Xmx{used_memory}m")
